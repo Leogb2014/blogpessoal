@@ -4,10 +4,13 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -21,7 +24,7 @@ public class Postagem {
 	private Long id;
 	
 	@NotBlank(message = "O atributo TITULO é obrigatório!")// validation - validar atributo para que ele não deixe de ser passado e também não seja vazio
-	@Size(min = 5, max = 100, message="O atributo TITULO deve ter bo mínimo 5 caracteres e no máximo 100 caracteres.")
+	@Size(min = 5, max = 100, message="O atributo TITULO deve ter no mínimo 5 caracteres e no máximo 100 caracteres.")
 	private String titulo;
 	
 	@NotBlank(message="o atributo TEXTO é obrigatório!")
@@ -30,6 +33,10 @@ public class Postagem {
 	
 	@UpdateTimestamp // pega a data e hora do sistema e preenche no banco de dados 
 	private LocalDateTime data;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Tema tema;
 
 	
 	public Long getId() {
@@ -63,6 +70,16 @@ public class Postagem {
 	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
+
+	public Tema getTema() {
+		return tema;
+	}
+
+	public void setTema(Tema tema) {
+		this.tema = tema;
+	}
+	
+	
 	
 
 }
