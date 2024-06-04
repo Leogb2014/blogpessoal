@@ -25,7 +25,7 @@ public class Tema {
 	private Long id;
 	
 	@NotBlank(message = "O atributo Descrição é obrigatório!")
-	@Size(min = 4, max = 50, message = "O campo descrição precis ter entre 4 e 50 caracteres!" )
+	@Size(min = 4, max = 50, message = "O campo descrição precisa ter entre 4 e 50 caracteres!" )
 	private String descricao;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tema", cascade = CascadeType.REMOVE)
